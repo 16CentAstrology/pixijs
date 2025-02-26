@@ -1,8 +1,9 @@
 {
     "compilerOptions": {
         "target": "es2020",
+        "lib": ["ESNext", "DOM", "WebWorker"],
+        "module": "ESNext",
         "allowJs": false,
-        "sourceMap": true,
         "removeComments": false,
         "strict": true,
         "noImplicitAny": true,
@@ -14,36 +15,26 @@
         "moduleResolution": "node",
         "resolveJsonModule": true,
         "downlevelIteration": true,
-        "baseUrl": "./",
+        "skipDefaultLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+        "types": ["node", "css-font-loading-module", "earcut", "@webgpu/types"],
+        "baseUrl": ".",
         "paths": {
-            "@pixi/*": [
-                "packages/*/src"
-            ],
-            "pixi.js": [
-                "bundles/pixi.js/src"
-            ],
-            "pixi.js-legacy": [
-                "bundles/pixi.js-legacy/src"
-            ],
-            "@pixi/node": [
-                "bundles/pixi.js-node/src"
-            ],
-            "@pixi/webworker": [
-                "bundles/pixi.js-webworker/src"
-            ]
-        }
+            "~/*": ["./src/*"],
+            "@test-utils": ["./tests/utils/index.ts"]
+        },
     },
     "exclude": [
         "node_modules",
         "**/dist/**",
         "**/lib/**",
-        "bundles/**/*.d.ts",
         "**/out/**"
     ],
     "ts-node": {
         "files": true,
         "compilerOptions": {
-            "esModuleInterop": true
+            "esModuleInterop": true,
+            "module": "commonjs"
         }
     }
 }

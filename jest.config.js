@@ -1,21 +1,26 @@
 module.exports = {
-    testPathIgnorePatterns: ['/node_modules/', '/src/', '/dist/', '/lib/', '/out/', '/bundles/'],
+    testPathIgnorePatterns: ['/node_modules/', '/dist/', '/lib/'],
     preset: 'ts-jest/presets/js-with-ts',
-    runner: 'jest-electron/runner',
-    testEnvironment: 'jest-electron/environment',
+    runner: '@pixi/jest-electron/runner',
+    testEnvironment: '@pixi/jest-electron/environment',
     setupFilesAfterEnv: [
         'jest-extended/all',
     ],
-    globalSetup: '<rootDir>/test/jest-global-setup.ts',
-    globalTeardown: '<rootDir>/test/jest-global-teardown.ts',
+    globalSetup: '<rootDir>/scripts/jest/jest-global-setup.ts',
+    globalTeardown: '<rootDir>/scripts/jest/jest-global-teardown.ts',
     transform: {
+        '\\.worker.ts$': '@pixi/webworker-plugins/lib/jest-transform',
         '\\.vert$': 'jest-raw-loader',
         '\\.frag$': 'jest-raw-loader',
+        '\\.wgsl$': 'jest-raw-loader',
     },
     moduleNameMapper: {
-        '^@pixi/(.*)$': '<rootDir>/packages/$1/src',
+        '^worker:(.*)$': '$1',
+        '^~/(.*)$': '<rootDir>/src/$1',
+        '^@test-utils$': '<rootDir>/tests/utils/index.ts'
     },
-    testMatch: ['**/?(*.)+(spec|tests).[tj]s?(x)'],
+    testMatch: ['**/?(*.)+(test)\\.ts'],
+    snapshotResolver: '<rootDir>/scripts/jest/jest-snapshot-resolver.js',
     globals: {
         'ts-jest': {
             tsconfig: {
@@ -26,9 +31,8 @@ module.exports = {
         },
     },
     collectCoverageFrom: [
-        '<rootDir>/packages/**/*.ts',
-        '!<rootDir>/packages/**/*.d.ts',
-        '!<rootDir>/packages/polyfill/**/*.ts',
+        '<rootDir>/src/**/*.ts',
     ],
     coverageDirectory: '<rootDir>/dist/coverage',
+    testTimeout: 10000
 };
