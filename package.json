@@ -62,7 +62,7 @@
     "tiny-lru": "^11.4.7"
   },
   "devDependencies": {
-    "@babel/core": "7.28.6",
+    "@babel/core": "7.29.6",
     "@babel/plugin-transform-modules-commonjs": "^7.28.6",
     "@pixi/eslint-config": "^6.0.0",
     "@pixi/jest-electron": "^26.1.0",
